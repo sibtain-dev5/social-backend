@@ -24,11 +24,10 @@ const generateAccessAndRefreshTokens = async(userId) => {
 }
 
 const registerUser = asyncHandler(async (req, res) => {
-  //Get User Details from User
+  //Get User Details from frontend
   const { userName, email, fullName, password } = req.body;
 
   //Fields Validation
-
   if (
     [userName, email, fullName, password].some((field) => field?.trim() === "")
   ) {
@@ -59,7 +58,7 @@ const registerUser = asyncHandler(async (req, res) => {
   );
 
   //check for user creation
-  if (createdUser) {
+  if (!createdUser) {
     throw new ApiError("500", "Something Wrong While Registering the user");
   }
 

@@ -1,6 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 import jwt from "jsonwebtoken";
-import bcrypt from "bcryptjs";
+import bcrypt from "bcrypt"
 import dotenv from "dotenv";
 
 const userSchema = new Schema(
@@ -40,9 +40,9 @@ const userSchema = new Schema(
 );
 
 //hashed Password
-userSchema.pre("save", async (next) => {
+userSchema.pre("save", async function (next) {
+  
   // Check either the password change or not if not change then skip the hash
-
   if (!this.isModified("password")) return next();
 
   //hash the password
@@ -50,12 +50,11 @@ userSchema.pre("save", async (next) => {
 });
 
 //Check if password is correct or not
-userSchema.methods.isPasswordCorrect = async (password) => {
+userSchema.methods.isPasswordCorrect = async function (password) {
   return await bcrypt.compare(password, this.password);
 };
 
 //Generate Access Token
-
 userSchema.methods.generateAccessToken = function () {
   return jwt.sign(
     {
