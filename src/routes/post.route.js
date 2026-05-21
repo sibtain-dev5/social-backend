@@ -6,7 +6,12 @@ const router = Router()
 
 router.route("/upload").post(
     upload.fields([
-        {image}
-    ],
+        {
+            name: "image",
+            maxCount: 1
+        }
+    ]),
     postUpload
-))
+)
+
+export default router

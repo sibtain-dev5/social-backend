@@ -1,7 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt"
-import dotenv from "dotenv";
 
 const userSchema = new Schema(
   {
@@ -40,10 +39,10 @@ const userSchema = new Schema(
 );
 
 //hashed Password
-userSchema.pre("save", async function (next) {
+userSchema.pre("save", async function () {
   
   // Check either the password change or not if not change then skip the hash
-  if (!this.isModified("password")) return next();
+  if (!this.isModified("password")) return;
 
   //hash the password
   this.password = await bcrypt.hash(this.password, 10);
