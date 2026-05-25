@@ -40,16 +40,16 @@ const postSchema = new mongoose.Schema(
   }
 );
 
-// Index for better query performance
-postSchema.index({ author: 1, createdAt: -1 });
-postSchema.index({ createdAt: -1 });
+// // Index for better query performance
+// postSchema.index({ author: 1, createdAt: -1 });
+// postSchema.index({ createdAt: -1 });
 
-// Update likes count when likes array changes
-postSchema.pre("save", function(next){
-  this.likesCount = this.like.length;
-  next();
+// // Update likes count when likes array changes
+// postSchema.pre("save", function(next){
+//   this.likesCount = this.like.length;
+//   next();
 
-})
+// })
 
 
 postSchema.plugin(mongooseAggregatePaginate)
